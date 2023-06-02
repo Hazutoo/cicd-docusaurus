@@ -1,0 +1,30 @@
+presetup:
+docker rm $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+
+***
+
+install:
+```
+curl -sfL https://get.k3s.io | sh - 
+sudo k3s kubectl get node 
+```
+
+uninstall:
+```
+/usr/local/bin/k3s-uninstall.sh
+```
+
+***
+
+kubectl config:
+```
+sudo cp /etc/rancher/k3s/k3s.yaml .kube/config
+export KUBECONFIG=/home/jdulewicz/.kube/config
+sudo chmod 600 .kube/config
+sudo chown jdulewicz:jdulewicz .kube/config
+k get nodes
+```
+
+![[Pasted image 20230530093644.png]]
+

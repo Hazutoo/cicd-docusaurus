@@ -1,0 +1,22 @@
+- [x] kody http
+- [ ] haproxy / nginx
+- [x] certbot
+- [ ] ClamAV
+- [ ] git
+- [ ] django + unicorn
+- [ ] python
+- [x] portainer
+- [ ] nginx reverse proxy
+- [x] ddns
+- [x] nas (omv, truenas, raid 0 1 5)
+- [ ] passbolt, bitwarden
+- [ ] suricata, snort (ids, ips)
+- [ ] scraping stron allegro z filtrami odrzucającymi dane kategorie
+- [ ] pagespeed
+- [ ] truenas scale, proxmox
+- [x] prometheus + grafana
+- [ ] node exporter + alert manager + back exporter
+- [ ] tapo power
+- [ ] https://github.com/prymitive/karma
+- [x] virtual env update proxmox
+- [ ] elastic 8 (3 fiz(9klastrów elastic) 4 vm ) ELK - 3xELA + agenty- OLD ELK

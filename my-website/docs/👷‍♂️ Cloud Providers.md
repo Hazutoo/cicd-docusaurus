@@ -1,0 +1,6 @@
+- AWS
+- Google Cloud
+- Alibaba Cloud
+- Azure
+- Digital Ocean
+!

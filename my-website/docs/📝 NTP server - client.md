@@ -1,0 +1,1 @@
+https://www.server-world.info/en/note?os=Ubuntu_20.04&p=ntp&f=3

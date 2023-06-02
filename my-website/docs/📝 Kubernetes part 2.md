@@ -1,0 +1,1 @@
+https://kubernetes.io/pl/docs/tutorials/kubernetes-basics/
