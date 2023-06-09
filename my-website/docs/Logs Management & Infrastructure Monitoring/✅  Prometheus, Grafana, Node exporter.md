@@ -1,8 +1,4 @@
-## Instalacja prometheus, node exporter, grafana
-
-https://ourcodeworld.com/articles/read/1686/how-to-install-prometheus-node-exporter-on-ubuntu-2004
-https://medium.com/devops-dudes/prometheus-alerting-with-alertmanager-e1bbba8e6a8e
-https://computingforgeeks.com/how-to-install-prometheus-on-rhel-8/
+## Installation prometheus, node exporter, grafana
 
 ### Node exporter
 
@@ -151,31 +147,35 @@ sudo systemctl start grafana-server
 sudo systemctl enable --now grafana-server
 ```
 
-Jeśli chcemmy wystawić usługę na innym porcie musimy wydetyować plik poniżej i zrestartować usługę
+If we want to expose the service on a different port, we need to edit the file below and restart the service.
 
 ```bash
 sudo nano /usr/share/grafana/conf/defaults.ini` `bash sudo systemctl restart grafana-server
 ```
 
-Otwarcie portu na firewall dla grafana (dla RHEL):
+Opening port on firewall for grafana (for RHEL):
 
 ```bash
 sudo firewall-cmd --add-port=3000/tcp --permanent
 sudo firewall-cmd --reload
 ```
 
-Dostep web dla grafany:
-http://localhost:3000 
-credentials: admin : admin
+Web access for Grafana: http://localhost:3000
+Credentials: admin : admin 
 
 ### Dashboard
 
 Należy dodać źródło danych jako prometheus:
 
-![[Pasted image 20230404100536.png]]
+![xD](./1.png)
 
 Następnie zaimportować dasboard:
 
 [https://grafana.com/grafana/dashboards/1860-node-exporter-full/](https://grafana.com/grafana/dashboards/1860-node-exporter-full/ "https://grafana.com/grafana/dashboards/1860-node-exporter-full/")
 
 ![[Pasted image 20230404100110.png]]
+
+Source:
+- https://ourcodeworld.com/articles/read/1686/how-to-install-prometheus-node-exporter-on-ubuntu-2004
+- https://medium.com/devops-dudes/prometheus-alerting-with-alertmanager-e1bbba8e6a8e
+- https://computingforgeeks.com/how-to-install-prometheus-on-rhel-8/
