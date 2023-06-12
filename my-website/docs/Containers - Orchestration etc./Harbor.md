@@ -1,97 +1,57 @@
-test
+# Harbor​
 
-# 1. Użytkownicy
+Harbor to aplikacja do przechowywania obrazów, zapewniająca bezpieczeństwo i kontrolę dostępu, zgodną, wydajną i interoperacyjną, umożliwiającą efektywne zarządzanie w chmurowych platformach obliczeniowych, takich jak Kubernetes i Docker, i będąca centralnym punktem dla przechowywania, zarządzania i udostępniania obrazów, zapewniając kontrolę dostępu, autoryzację i zwiększoną świadomość bezpieczeństwa w cyklu życia aplikacji.​
 
-TODO:
-- [ ] do sprawdzenia czy jest opcja odczytu logów z nowo założonych kont
+# Bezpieczeństwo systemu ​
 
-![[Pasted image 20230510104619.png]]
+Skanowanie w poszukiwaniu luk bezpieczeństwa (Trivy)​
 
-Harbor zarządza obrazami poprzez projekty. Administrator dostarcza dostęp do obrazów dla użytkowników poprzez dodanie usera do projektu i przypisanie mu odpowiedniej roli:
+Notary zapewnia bezpieczeństwo i integralność obrazów. Dzięki podpisywaniu obrazów i weryfikacji ich podpisów, Notary chroni przed nieautoryzowanymi zmianami i zapewnia, że obrazy są bezpieczne do użycia, bez względu na miejsce ich przechowywania.​
 
-1. Limited Guest - nie ma pełnych uprawnień do odczytu projektu.
-- Może pobierać obrazy (pull)
-- Nie może pushować obrazów
-- Brak dostępu do logów lub sprawdzenia listy użytkowników w projekcie
+Harbor dostarcza możliwość zbierania, przechowywania i przeglądania logów dotyczących między innymi:​
 
-2. Guest - ma tylko odczyt dla projektu.
-- Może pobierać obrazy (pull)
-- Może retagować obrazy
-- Nie może pushować obrazów
+Administracyjne: tworzenie, usuwanie i modyfikacja użytkowników, projektów, repozytoriów.​
 
-3. Developer - ma odczyt i zapis dla projektu.
+Obrazy: pobieranie, przesyłanie, skanowanie, usuwanie obrazów.​
 
-4. Maintainer - posiada uprawnienia developera oraz:
-- Może skanować obrazy
-- Wyświetlać replications jobs
-- Usuwać obrazy (oraz helm charts)
+Uwierzytelnianie i autoryzacja: logowanie, wylogowanie, autoryzacja dostępu, operacje na obrazach.​
 
-5. ProjectAdmin - rola przyznawana osobie zakładającej nowy projekt.
-- Posiada uprawnienia zapis - odczyt
-- Może dodawać / usuwać użytkowników
-- Ma dostęp do *vulnerability scan* (Trivy)
+Skanowanie podatności: wyniki skanowania, raporty dotyczące podatności.​
 
-****
+Rejestracja zdarzeń: tworzenie, usuwanie, modyfikacja audytu, dostęp do logów.​
 
- Opróćz powyższych ról istnieją dwie role na poziomie systemu harbor:
+Zdarzenia systemowe i diagnostyczne: start, zatrzymanie, błędy aplikacji Harbor.​
+​
+# Notary
 
-1. Harbor system administrator - ma możliwość:
--  listować wszystkie projekty
-- nadawać uprawnienia / role użytkownikom
--  ustalać politykę skanowania podatności dla wszystkich obrazów
+Skrót (digest) to unikalny identyfikator obrazu, który jest tworzony przez funkcję skrótu kryptograficznego. Pozwala to na jednoznaczne zidentyfikowanie obrazu, nawet jeśli jego tagi zostaną zmienione. Uwierzytelnianie odnosi się do procesu weryfikacji tożsamości użytkownika lub systemu, który próbuje pobrać skrót obrazu . ​
 
-2. Anonymous - gdy użytkownik nie zaloguje się ma możliwość odczytu publicznych projektów.
+# Tworzenie projektów​
 
-![[Pasted image 20230510150159.png]]
+Obrazy nie mogą być przesyłane do Harbor przed utworzeniem projektu.​
 
-Pełna lista uprawnień dla danych ról:
-https://goharbor.io/docs/2.8.0/administration/managing-users/user-permissions-by-role/
+Projekty może tworzyć każdy zarejestrowany użytkownik.​
 
-# 2. Konfiguracja ustawień globalnych
+W projekcie zastosowano kontrolę dostępu opartą na rolach, zapewniającą odpowiednie uprawnienia użytkownikom do wykonywania określonych operacji.​
 
-Użyj menu rozwijanego "Tworzenie projektu", aby ustawić, którzy użytkownicy mogą tworzyć projekty. Wybierz "Wszyscy", aby umożliwić wszystkim użytkownikom tworzenie projektów. Wybierz "Admin only", aby umożliwić tworzenie projektów tylko użytkownikom posiadającym rolę administratora systemu Harbor.
-![[Pasted image 20230510151311.png]]
+Istnieją dwa rodzaje projektów w Harbor:​
 
-# 3. Skanowanie w poszukiwaniu luk bezpieczeństwa
+Publiczne: Każdy użytkownik może pobierać obrazy z tego projektu.​
 
-Harbor, oferuje statyczną analizę podatności obrazów. Do przeprowadzenia tej analizy wykorzystuje on Trivy, pozwalające na skanowanie obrazów pod kątem potencjalnych luk w zabezpieczeniach.
+Prywatne: Tylko użytkownicy, którzy są członkami projektu, mogą pobierać obrazy.​
+​
+# Proxy Cache ​
 
-![[Pasted image 20230511141119.png]]
-![[Pasted image 20230511141326.png]]
+Mechanizm, który przechowuje kopie często używanych zasobów w pamięci podręcznej, aby przyspieszyć ich dostępność i zmniejszyć obciążenie sieci. W przypadku projektu Harbor, Proxy Cache może być używany do przechowywania obrazów kontenerów, które są powszechnie pobierane przez wiele użytkowników.​
 
-# 4. Tworzenie projektów
+# Proxy Cache – polecenia CLI​
 
-Projekt w Harbor zawiera wszystkie repozytoria aplikacji. Obrazy nie mogą być przesyłane do Harbor przed utworzeniem projektu. W projektach zastosowano kontrolę dostępu opartą na rolach (Role-Based Access Control - RBAC), dzięki czemu tylko użytkownicy posiadający odpowiednie role mogą wykonywać określone operacje.
+```bash
+do wpisania polecenia
+```
 
-Istnieją dwa rodzaje projektów w Harbor:
+# Zarządzanie etykietami
 
-- Publiczne: Każdy użytkownik może pobierać obrazy z tego projektu. Jest to wygodny sposób udostępniania repozytoriów innym osobom.
-- Prywatne: Tylko użytkownicy, którzy są członkami projektu, mogą pobierać obrazy.
+Global Level Label: Zarządzany przez administratorów systemu Harbor i używany do zarządzania obrazami całego systemu. Mogą być dodawane do obrazów w ramach dowolnych projektów.​
 
-Tworzysz różne projekty, do których przypisujesz użytkowników, aby mogli przesyłać i pobierać repozytoria obrazów. Konfigurujesz również ustawienia specyficzne dla projektu. Po pierwszej instalacji Harbor tworzony jest domyślny publiczny projekt o nazwie "library".
-
-Wymagania wstępne Zaloguj się do Harbor za pomocą konta administratora Harbor lub konta administratora projektu.
-
-Procedura:
-1. Przejdź do sekcji "Projekty" i kliknij "Nowy projekt".
-2. Podaj nazwę dla projektu.
-3. (Opcjonalnie) Zaznacz pole wyboru "Publiczny", aby uczynić projekt publicznym.
-	Jeśli ustawisz projekt na publiczny, każdy użytkownik będzie mógł pobierać obrazy z tego projektu. Jeśli pozostawisz projekt jako prywatny, tylko użytkownicy będący członkami projektu będą mogli pobierać obrazy. Możesz w dowolnym momencie przełączać projekty z publicznych na prywatne i odwrotnie po utworzeniu projektu.
-4. Kliknij "OK".
-
-![[Pasted image 20230511145724.png]]
-
-Po utworzeniu projektu możesz przeglądać podsumowanie, repozytoria, wykresy Helm, członków, etykiety, skaner, p2p preheat, zasady, konta robotów, logi i konfigurację za pomocą zakładek nawigacyjnych.
-
-Dostępne są dwa widoki do wyświetlania repozytoriów: widok listy i widok kart. Możesz przełączać się między nimi, klikając odpowiednią ikonę.
-
-Właściwości projektu można zmieniać, klikając "Konfiguracja".
-
-Aby umożliwić dostęp do wszystkich repozytoriów w projekcie dla każdego, zaznacz pole wyboru "Publiczny".
-
-Aby zapobiec pobieraniu niepodpisanych obrazów w ramach projektu, zaznacz pole wyboru "Uniemożliwienie uruchamiania podatnych obrazów". Więcej informacji na temat zauf
-
----
-
-limit projektu na usera: 
-- [ ] check
+Project Level Label: Zarządzany przez administratorów projektu w ramach konkretnego projektu i może być dodawany tylko do obrazów należących do tego projektu.​
