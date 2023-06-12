@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: docus-web
-          image: jaroslawdulewicz/docus-web:11
+          image: jaroslawdulewicz/docus-web:15
           ports:
             - containerPort: 80
