@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docus-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docus-web
+  template:
+    metadata:
+      labels:
+        app: docus-web
+    spec:
+      containers:
+        - name: docus-web
+          image: jaroslawdulewicz/docus-web:11
+          ports:
+            - containerPort: 80
