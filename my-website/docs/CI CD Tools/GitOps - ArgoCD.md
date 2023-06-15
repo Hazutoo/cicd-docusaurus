@@ -1,0 +1,6 @@
+---
+slug: argocd
+title: ArgoCD 🔄
+authors: [jdulewicz]
+tags: [gitops, argocd, cicd]
+---
