@@ -33,6 +33,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -61,12 +62,6 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
           {href: 'https://dulewicz.site', label: 'Main site', position: 'right'},
           {
             href: 'https://github.com/Hazutoo',
@@ -83,7 +78,7 @@ const config = {
             items: [
               {
                 label: 'Get started',
-                to: '/docs/intro',
+                to: '/',
               },
             ],
           },
@@ -110,7 +105,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Jaroslaw Dulewicz Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Jaroslaw Dulewicz, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
