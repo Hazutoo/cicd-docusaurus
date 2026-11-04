@@ -1,0 +1,13 @@
+# Never commit local TeamCity agent state or credentials.
+/data/teamcity_agent/
+
+# Generated files and dependencies
+**/node_modules/
+**/build/
+**/.docusaurus/
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local tooling
+.DS_Store

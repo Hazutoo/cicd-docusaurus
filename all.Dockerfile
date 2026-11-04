@@ -1,12 +1,11 @@
+# Historical learning example (2023); dependencies/base images are not maintained.
 FROM node:20-alpine3.16 AS build
-LABEL description="Documentation build"
-WORKDIR /my-website
-COPY ./my-website /my-website
-RUN addgroup -S app && adduser -S app -G app && \
-    chown -R app:app /my-website && \
-    npm install && npm run build
 
-USER app
+WORKDIR /my-website
+COPY ./my-website/package*.json ./
+RUN npm ci
+COPY ./my-website/ ./
+RUN npm run build
 
 FROM nginx:mainline-alpine3.17-slim
-COPY --from=build /my-website/build /usr/share/nginx/html
+COPY --from=build /my-website/build/ /usr/share/nginx/html/

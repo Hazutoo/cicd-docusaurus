@@ -1,2 +1,8 @@
+.git
+data
 node_modules
-build
+my-website/node_modules
+my-website/build
+my-website/.docusaurus
+.env
+my-website/.env

@@ -1,9 +1,0 @@
-FROM node:20-alpine3.16 AS build
-LABEL description="Documentation build"
-WORKDIR /my-website
-COPY ./my-website /my-website
-RUN addgroup -S app && adduser -S app -G app && \
-    chown -R app:app /my-website && \
-    npm install && npm run build
-
-USER app
